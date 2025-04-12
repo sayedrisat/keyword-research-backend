@@ -6,8 +6,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_URL = 'https://api.sambanova.ai/v1/chat/completions';
-const API_KEY = '3b9b8db7-be77-418a-b0b4-abf57834941a';
+// Use environment variables
+const API_URL = process.env.API_URL;
+const API_KEY = process.env.API_KEY;
+
+// Add a root route for GET requests
+app.get('/', (req, res) => {
+  res.send('Welcome to the Keyword Research API! Use POST /api/keywords to fetch keywords.');
+});
 
 app.post('/api/keywords', async (req, res) => {
   const { query } = req.body;
